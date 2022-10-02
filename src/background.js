@@ -12,15 +12,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     // Log message coming from the `request` parameter
     console.log(request.payload.message);
-    // Send a response message
     sendResponse({
       message,
     });
   }
+  return true;
 });
-
-// chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-//   if (request.type === 'GETOTHERS') {
-
-//   }
-// });

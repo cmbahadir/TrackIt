@@ -32,12 +32,19 @@ chrome.runtime.sendMessage(
 
 // Listen for message
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.type === 'COUNT') {
-    console.log(`Current count is ${request.payload.count}`);
-  }
+  if (request.type === 'GET_FR24_ICAO') {
+    const url = "https://data-live.flightradar24.com/clickhandler/?version=1.5&flight="
+    let icao = "ICAO"
 
-  // Send an empty response
-  // See https://github.com/mozilla/webextension-polyfill/issues/130#issuecomment-531531890
-  sendResponse({});
+    fetch(url + request.payload.json_id)
+      .then(res => res.json())
+      .then(data => {
+        icao = data["aircraft"]["hex"];
+        console.log("ICAO: " + icao);
+        sendResponse({
+          icao,
+        });
+      });
+  }
   return true;
 });

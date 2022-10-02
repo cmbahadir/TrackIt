@@ -10,92 +10,12 @@ import './popup.css';
   // To get storage access, we have to mention it in `permissions` property of manifest.json file
   // More information on Permissions can we found at
   // https://developer.chrome.com/extensions/declare_permissions
-  const counterStorage = {
-    get: cb => {
-      chrome.storage.sync.get(['count'], result => {
-        cb(result.count);
-      });
-    },
-    set: (value, cb) => {
-      chrome.storage.sync.set(
-        {
-          count: value,
-        },
-        () => {
-          cb();
-        }
-      );
-    },
-  };
 
-  function setupCounter(initialValue = 0) {
-    document.getElementById('counter').innerHTML = initialValue;
-
-    document.getElementById('incrementBtn').addEventListener('click', () => {
-      updateCounter({
-        type: 'INCREMENT',
-      });
-    });
-
-    document.getElementById('decrementBtn').addEventListener('click', () => {
-      updateCounter({
-        type: 'DECREMENT',
-      });
-    });
+  function contentLoaded() {
+    // TODO: While Pop-Up DOM loaded.
   }
 
-  function updateCounter({ type }) {
-    counterStorage.get(count => {
-      let newCount;
-
-      if (type === 'INCREMENT') {
-        newCount = count + 1;
-      } else if (type === 'DECREMENT') {
-        newCount = count - 1;
-      } else {
-        newCount = count;
-      }
-
-      counterStorage.set(newCount, () => {
-        document.getElementById('counter').innerHTML = newCount;
-
-        // Communicate with content script of
-        // active tab by sending a message
-        chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-          const tab = tabs[0];
-
-          chrome.tabs.sendMessage(
-            tab.id,
-            {
-              type: 'COUNT',
-              payload: {
-                count: newCount,
-              },
-            },
-            response => {
-              console.log('Current count value passed to contentScript file');
-            }
-          );
-        });
-      });
-    });
-  }
-
-  function restoreCounter() {
-    // Restore count value
-    counterStorage.get(count => {
-      if (typeof count === 'undefined') {
-        // Set counter value as 0
-        counterStorage.set(0, () => {
-          setupCounter(0);
-        });
-      } else {
-        setupCounter(count);
-      }
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', restoreCounter);
+  document.addEventListener('DOMContentLoaded', contentLoaded);
 
   // Communicate with background file by sending a message
   chrome.runtime.sendMessage(
@@ -112,32 +32,38 @@ import './popup.css';
 
   chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
     const url = new URL(tabs[0].url);
-    let icao = "ICAO";
     let flight = "flight";
+    let paths = url.pathname.split('/');
+    flight = paths[paths.length - 1];
+
     if (url.origin.indexOf("flightradar24") > -1) {
-      let paths = url.pathname.split('/');
-      icao = paths[paths.length - 1];
+      let json_id = paths[paths.length - 1];
       flight = paths[paths.length - 2];
-      document.getElementById('RadarBox').innerHTML = "<a href='https://radarbox.com/flight/" + flight + "'>YES</a>";
-      document.getElementById('FlightAware').innerHTML = "<a href='https://flightaware.com/live/flight/" + flight + "'>YES</a>";
-      document.getElementById('ADSBExchange').innerHTML = "<a href='https://globe.adsbexchange.com/?icao=" + icao + "'>YES</a>";
-      document.getElementById('Flightradar24').innerHTML = "<a href='https://flightradar24.com/" + flight + "/" + icao + "'>YES</a>";
+
+      chrome.tabs.sendMessage(
+        tabs[0].id,
+        {
+          type: 'GET_FR24_ICAO',
+          payload: {
+            json_id: json_id,
+          },
+        },
+        function(response) {
+          document.getElementById('ICAO').textContent = response.icao;
+          document.getElementById('ADSBExchange').innerHTML = "<a href='https://globe.adsbexchange.com/?icao=" + response.icao + "'>YES</a>";
+        }
+      );
     }
-    if (url.origin.indexOf("radarbox") > -1) {
-      let paths = url.pathname.split('/');
-      flight = paths[paths.length - 1];
-    }
+
     if (url.origin.indexOf("adsbexchange") > -1) {
-      let paths = url.pathname.split('/').split('=');
+      let paths = paths.split('=');
       icao = paths[paths.length - 1];
     }
-    if (url.origin.indexOf("flightaware") > -1) {
-      let paths = url.pathname.split('/');
-      flight = paths[paths.length - 1];
-    }
-    // use `url` here inside the callback because it's asynchronous!
-    console.log("CURRENT URL:" + url);
-    document.getElementById('ICAO').textContent = icao;
-    
+
+    document.getElementById('RadarBox').innerHTML = "<a href='https://radarbox.com/flight/" + flight + "'>YES</a>";
+    document.getElementById('FlightAware').innerHTML = "<a href='https://flightaware.com/live/flight/" + flight + "'>YES</a>";
+    //TODO: json_id should be fetched fwith content_script.js
+    document.getElementById('Flightradar24').innerHTML = "<a href='https://flightradar24.com/" + flight + "/" + "json_id" + "'>YES</a>";
+
   })
 })();
