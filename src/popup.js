@@ -49,8 +49,8 @@ import './popup.css';
           },
         },
         function(response) {
-          document.getElementById('ICAO').textContent = response.icao;
-          document.getElementById('ADSBExchange').innerHTML = "<a href='https://globe.adsbexchange.com/?icao=" + response.icao + "'>YES</a>";
+          document.getElementById('icao').textContent = response.icao;
+          document.getElementById('ADSBExchange').innerHTML = "<a href='https://globe.adsbexchange.com/?icao=" + response.icao + "'>GO</a>";
         }
       );
     }
@@ -60,10 +60,11 @@ import './popup.css';
       icao = paths[paths.length - 1];
     }
 
-    document.getElementById('RadarBox').innerHTML = "<a href='https://radarbox.com/flight/" + flight + "'>YES</a>";
-    document.getElementById('FlightAware').innerHTML = "<a href='https://flightaware.com/live/flight/" + flight + "'>YES</a>";
+    document.getElementById('flight').textContent = flight;
+    document.getElementById('RadarBox').innerHTML = "<a href='https://radarbox.com/flight/" + flight + "'>GO</a>";
+    document.getElementById('FlightAware').innerHTML = "<a href='https://flightaware.com/live/flight/" + flight + "'>GO</a>";
     //TODO: json_id should be fetched fwith content_script.js
-    document.getElementById('Flightradar24').innerHTML = "<a href='https://flightradar24.com/" + flight + "/" + "json_id" + "'>YES</a>";
+    document.getElementById('Flightradar24').innerHTML = "<a href='https://flightradar24.com/" + flight + "/" + "json_id" + "'>GO</a>";
 
   })
 })();

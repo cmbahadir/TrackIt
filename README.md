@@ -1,11 +1,13 @@
 # <img src="public/icons/icon_48.png" width="45" align="left"> Trackit
 
-My Chrome Extension
+Chrome extension to easily switch between the plane tracking web apps. 
 
 ## Features
 
-- Feature 1
-- Feature 2
+- Flightradar24
+- ADSBExchange
+- Flightaware
+- RadarBox
 
 ## Install
 
@@ -13,9 +15,12 @@ My Chrome Extension
 
 ## Contribution
 
-Suggestions and pull requests are welcomed!.
+After you clone the repo run below commands to build the extension in local. 
 
----
+```sh
+npm install
+node ./node_modules/webpack/bin/webpack.js --mode=production --config config/webpack.config.js
+```
 
-This project was bootstrapped with [Chrome Extension CLI](https://github.com/dutiyesh/chrome-extension-cli)
+It will be built under /build under folder.
 
