@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Trackit",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "EAsily switch between flight trackers.",
   "icons": {
     "16": "icons/icon_16.png",
