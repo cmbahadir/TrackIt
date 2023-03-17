@@ -3,32 +3,6 @@
 import './popup.css';
 
 (function () {
-  // We will make use of Storage API to get and store `count` value
-  // More information on Storage API can we found at
-  // https://developer.chrome.com/extensions/storage
-
-  // To get storage access, we have to mention it in `permissions` property of manifest.json file
-  // More information on Permissions can we found at
-  // https://developer.chrome.com/extensions/declare_permissions
-
-  function contentLoaded() {
-    // TODO: While Pop-Up DOM loaded.
-  }
-
-  document.addEventListener('DOMContentLoaded', contentLoaded);
-
-  // Communicate with background file by sending a message
-  chrome.runtime.sendMessage(
-    {
-      type: 'GREETINGS',
-      payload: {
-        message: 'Hello, my name is Pop. I am from Popup.',
-      },
-    },
-    response => {
-      console.log(response.message);
-    }
-  );
 
   chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
     const url = new URL(tabs[0].url);
@@ -50,7 +24,7 @@ import './popup.css';
         },
         function(response) {
           document.getElementById('icao').textContent = response.icao;
-          document.getElementById('ADSBExchange').innerHTML = "<a href='https://globe.adsbexchange.com/?icao=" + response.icao + "'>GO</a>";
+          document.getElementById('ADSBExchange').innerHTML = "<a href='https://globe.adsbexchange.com/?icao=" + response.icao + "'><img src='icons/adsbexchange.png'/></a>";
         }
       );
     }
@@ -61,10 +35,7 @@ import './popup.css';
     }
 
     document.getElementById('flight').textContent = flight;
-    document.getElementById('RadarBox').innerHTML = "<a href='https://radarbox.com/flight/" + flight + "'>GO</a>";
-    document.getElementById('FlightAware').innerHTML = "<a href='https://flightaware.com/live/flight/" + flight + "'>GO</a>";
-    //TODO: json_id should be fetched fwith content_script.js
-    document.getElementById('Flightradar24').innerHTML = "<a href='https://flightradar24.com/" + flight + "/" + "json_id" + "'>GO</a>";
-
+    document.getElementById('RadarBox').innerHTML = "<a href='https://radarbox.com/flight/" + flight + "'><img src='icons/radarbox.png'/></a>";
+    document.getElementById('FlightAware').innerHTML = "<a href='https://flightaware.com/live/flight/" + flight + "'><img src='icons/flightaware.png'/></a>";
   })
 })();

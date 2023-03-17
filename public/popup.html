@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>My Chrome Extension</title>
+  <title>TrackIt</title>
   <link rel="stylesheet" href="popup.css" />
 </head>
 
@@ -12,29 +12,24 @@
   <div class="app">
     <table>
       <tr>
-        <th id="flight">Flight Id</th>
+        <th>Callsign</th>
+        <th>ICAO</th>
         <th>RadarBox</th>
         <th>FlightAware</th>
         <th>ADSBExchange</th>
-        <th>Flightradar24</th>
+        <!-- <th>Flightradar24</th> -->
       </tr>
       <tr>
-        <td id="icao">ICAO</td>
+        <th id="flight">N/A</th>
+        <td id="icao">N/A</td>
         <td id="RadarBox">N/A</td>
         <td id="FlightAware">N/A</td>
         <td id="ADSBExchange">N/A</td>
-        <td id="Flightradar24">N/A</td>
+        <!-- <td id="Flightradar24">N/A</td> -->
       </tr>
     </table>
   </div>
   <script src="popup.js"></script>
-
-  <!--
-    This HTML file opens when you click on icon from the toolbar.
-
-    To begin the development, run `npm run watch`.
-    To create a production bundle, use `npm run build`.
-  -->
 </body>
 
 </html>
