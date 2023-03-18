@@ -1,12 +1,23 @@
-// 'use strict';
 // background.js
 
-chrome.tabs.onActivated.addListener(function (activeInfo) {
-    chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-        if (activeInfo.tabId === !changeInfo.url.startsWith("https://www.flightradar24.com/")) {
-            chrome.action.disable(tabId);
-        } else {
-            chrome.action.enable(tabId);
-        }
-    })
-})
+chrome.runtime.onInstalled.addListener(() => {
+    // disable the action by default
+    chrome.action.disable();
+  
+    // remove existing rules so only ours are applied
+    chrome.declarativeContent.onPageChanged.removeRules(undefined, () => {
+      // add a custom rule
+      chrome.declarativeContent.onPageChanged.addRules([
+        {
+          // define the rule's conditions
+          conditions: [
+            new chrome.declarativeContent.PageStateMatcher({
+              pageUrl: { hostSuffix: "flightradar24.com" },
+            }),
+          ],
+          // show the action when conditions are met
+          actions: [new chrome.declarativeContent.ShowAction()],
+        },
+      ]);
+    });
+  });
