@@ -4,6 +4,7 @@
 *::after {
     box-sizing: border-box;
 }
+
 /* normalize css ends here */
 
 
@@ -15,6 +16,7 @@ html {
 body {
     width: 400px;
     height: 75px;
+    background-color: whitesmoke;
 }
 
 .app {
@@ -40,8 +42,26 @@ body {
     opacity: .1;
 }
 
-table, th, td {
+table,
+th,
+td {
     font-family: "Archivo Black";
     border: 1px solid black;
     border-radius: 10px;
-  }
+}
+
+footer {
+    position: relative;
+    height: 40px;
+    width: 100%;
+}
+
+p.copyright {
+    position: absolute;
+    width: 100%;
+    color: black;
+    line-height: 40px;
+    font-size: 0.7em;
+    text-align: right;
+    bottom: 0;
+}

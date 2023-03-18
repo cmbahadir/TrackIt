@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Trackit",
   "version": "0.1.0",
-  "description": "EAsily switch between flight trackers.",
+  "description": "Easily switch between flight trackers.",
   "icons": {
     "16": "icons/icon_16.png",
     "32": "icons/icon_32.png",
@@ -17,16 +17,18 @@
   },
   "permissions": [
     "storage",
-    "tabs"
+    "tabs",
+    "activeTab"
   ],
   "content_scripts": [
     {
       "matches": [
-        "<all_urls>"
+        "*://www.flightradar24.com/*"
       ],
       "run_at": "document_idle",
       "js": [
-        "contentScript.js"
+        "contentScript.js",
+        "popup.js"
       ]
     }
   ]
