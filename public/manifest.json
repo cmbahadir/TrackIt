@@ -9,23 +9,26 @@
     "48": "icons/icon_48.png",
     "128": "icons/icon_128.png"
   },
+  "action": {
+    "default_icon": "icons/icon_gray.png"
+  },
   "background": {
     "service_worker": "background.js"
-  },
-  "action": {
-    "default_popup": "popup.html"
   },
   "permissions": [
     "storage",
     "tabs",
     "activeTab"
   ],
+  "host_permissions": [
+    "*://*.flightradar24.com/*"
+  ],
   "content_scripts": [
     {
       "matches": [
-        "*://www.flightradar24.com/*"
+        "*://*.flightradar24.com/*"
       ],
-      "run_at": "document_idle",
+      "run_at": "document_end",
       "js": [
         "contentScript.js",
         "popup.js"
