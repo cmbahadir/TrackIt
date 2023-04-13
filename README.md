@@ -6,6 +6,12 @@ The TrackIt Extension is a browser extension that allows you to track flights on
 
 ## Installation
 
+### Installing from Chrome Web Store
+
+Released and reviewed version is available on [Chrome Web Store](https://chrome.google.com/webstore/detail/trackit/goldnignmhhfbhnkbocokfhndgecafop?hl=en-GB)
+
+### Installing the development release
+
 1. Download the latest release of the FlightTracker Extension from the [releases page](https://github.com/cmbahadir/trackit/releases).
 
 2. Extract the downloaded file to a folder on your computer.
