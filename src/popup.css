@@ -7,13 +7,14 @@
 
 /* normalize css ends here */
 
-
 html {
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
     color: #222;
 }
 
 body {
+    margin: 0;
+    padding: 0;
     width: 400px;
     height: 75px;
     background-color: whitesmoke;
@@ -25,9 +26,12 @@ body {
 
 .app {
     display: flex;
+    padding: 0 10px;
+    box-sizing: border-box;
     justify-content: center;
     flex-direction: column;
     text-align: center;
+    margin-top: 20px;
 }
 
 .title {
@@ -44,60 +48,31 @@ body {
     width: 50px;
     border: .5px dashed #000;
     opacity: .1;
+    margin-top: 30px;
+    margin-bottom: 25px;
 }
 
-table,
+table {
+    width: calc(100% - 20px);
+    border-collapse: collapse;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 th,
 td {
     font-family: "Archivo Black";
     border: 1px solid black;
     border-radius: 10px;
-    margin-left: 10px; /* Added margin to the left */
-    margin-right: 10px; /* Added margin to the right */
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px;
 }
 
 footer {
     position: relative;
     height: 40px;
     width: 100%;
-}
-
-p.copyright {
-    position: absolute;
-    width: 100%;
-    color: black;
-    line-height: 40px;
-    font-size: 0.7em;
-    text-align: right;
-    bottom: 0;
-}
-/* Add more user-friendly styles below */
-
-body {
-    margin: 0;
-    padding: 0;
-}
-
-.app {
-    margin-top: 20px;
-}
-
-.divider {
-    margin-top: 30px;
-    margin-bottom: 25px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th,
-td {
-    padding: 10px;
-}
-
-footer {
     background-color: #f5f5f5;
     border-top: 1px solid #ddd;
     text-align: center;
@@ -105,4 +80,14 @@ footer {
 
 p {
     margin: 0;
+}
+
+footer p {
+    position: absolute;
+    width: 100%;
+    color: black;
+    line-height: 40px;
+    font-size: 0.7em;
+    text-align: right;
+    bottom: 0;
 }

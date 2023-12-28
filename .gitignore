@@ -1,7 +1,7 @@
 # dependencies
 /node_modules
-package-lock.json
-size-plugin.json
+/package-lock.json
+/size-plugin.json
 /.vscode
 
 # production
@@ -9,5 +9,30 @@ size-plugin.json
 
 # misc
 .DS_Store
-
 npm-debug.log*
+*.log
+
+# IDE / editor files
+.idea
+*.sublime-project
+*.sublime-workspace
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*.bak
+
+# OS generated files
+ehthumbs.db
+Thumbs.db
+.DS_Store*
+._*
+.Spotlight-V100
+.Trashes
+Icon?

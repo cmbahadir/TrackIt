@@ -10,6 +10,9 @@ import './popup.css';
     let paths = url.pathname.split('/');
     flight = paths[paths.length - 1];
 
+    // Set the "currentYear" dynamically
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
     if (tabs[0].url.indexOf("flightradar24") === -1) {
       document.body.innerHTML = 'Please go to flightradar24.com or adsbexchange.com to use this extension.';
       return;
