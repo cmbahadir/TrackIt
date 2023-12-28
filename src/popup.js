@@ -14,7 +14,7 @@ import './popup.css';
     document.getElementById('currentYear').textContent = new Date().getFullYear();
 
     if (tabs[0].url.indexOf("flightradar24") === -1) {
-      document.body.innerHTML = 'Please go to flightradar24.com or adsbexchange.com to use this extension.';
+      document.body.innerHTML = 'Please go to flightradar24.com to use this extension.';
       return;
     }
 
